@@ -1,0 +1,132 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyP2FEhO/Skxz+yhebOREVnX",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Jashwanthallenki/learning-to-find-square-of-integers/blob/main/Code\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "chaq3ntxy7ny"
+      },
+      "outputs": [],
+      "source": [
+        "import numpy as np\n",
+        "import keras\n",
+        "from keras.models import Sequential\n",
+        "from keras.layers import Dense\n",
+        "from keras.optimizers import Adam\n",
+        "from keras.activations import relu\n",
+        "from keras import regularizers"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "model = Sequential()\n",
+        "model.add(Dense(8,activation=\"relu\",kernel_regularizer=regularizers.l2(0.001),input_shape=(1,)))\n",
+        "model.add(Dense(8,activation=\"relu\",kernel_regularizer=regularizers.l2(0.001)))\n",
+        "model.add(Dense(1))\n",
+        "model.compile(optimizer=Adam(),loss=\"mse\")"
+      ],
+      "metadata": {
+        "id": "LsILQt1GoQWO"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "x=np.random.random(100)*100-50\n",
+        "y=x**2\n"
+      ],
+      "metadata": {
+        "id": "B4_wZukIpqRG"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "pred=model.fit(x,y,validation_split=0.2,epochs=5000,batch_size=300)\n"
+      ],
+      "metadata": {
+        "id": "39AP75VvqBHe"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "model.predict([54,36,42,68,2])"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "6-fxn-nhqptV",
+        "outputId": "784e3990-868c-4fe8-b118-c28c031917a5"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "1/1 [==============================] - 0s 42ms/step\n"
+          ]
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([[2202.2742   ],\n",
+              "       [1433.416    ],\n",
+              "       [1689.702    ],\n",
+              "       [2800.2751   ],\n",
+              "       [   5.1509056]], dtype=float32)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 8
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "RAfOhAu3rx2j"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
